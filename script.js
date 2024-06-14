@@ -16,6 +16,8 @@ cartBtn.addEventListener("click", function(){
     cartModal.style.display = "flex"
 })
 
+
+
 // Fechar o modal quando clicar fora
 cartModal.addEventListener("click", function(event){
     if(event.target === cartModal){
@@ -58,12 +60,25 @@ function addToCart(name, price){
     }
 
 
-    function addQuantity(){
-        quantity++
-    }
+  
 
 
+    function abrirAlerta(){
+        Toastify({
+            text: "Item adicionado ao carrinho!",
+            duration: 2000,
 
+            close: false,
+            gravity: "bottom", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+      }
+    
 
 
 
@@ -80,7 +95,7 @@ function updateCartModal(){
         cartItemElement.classList.add("flex", "justify-between", "mb-4", "flex-col")
 
         cartItemElement.innerHTML = `
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between max-h-[30%]">
             <div>
                 <p class="font-bold">${item.name}</p>
                 <p>Qtd: ${item.quantity}</p>
@@ -188,6 +203,9 @@ checkoutBtn.addEventListener("click", function(){
         return;
     }*/
 
+
+
+
     if(cart.length === 0) return;
     if(addressInput.value === ""){
        addressWarn.classList.remove("hidden") 
@@ -233,12 +251,64 @@ function checkRestaurantOpen(){
 const spanItem = document.getElementById("date-span")
 const isOpen = checkRestaurantOpen();
 
+
 if(isOpen){
     spanItem.classList.remove("bg-red-500");
     spanItem.classList.add("bg-green-600")
+    
 }else{
     spanItem.classList.remove("bg-green-600")
     spanItem.classList.add("bg-red-500")
+    //spanItem.innerHTML = `<div class="text-white text-center">Fechado</br>Horário de atendimento</br>Seg á Dom 18:00 ás 22:00</div>`
 }
 
+
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 2000);
+   // Change image every 2 seconds
+}
+
+
+/*const button = document.querySelector("button")
+const modal = document.querySelector("dialog")
+const buttonClose = document.querySelector("dialog button")
+
+button.onclick = function (){
+    modal.showModal()
+}
+
+buttonClose.onclick = function (){
+    modal.close()
+}*/
+
+
+
+const meuElemento = document.getElementById("bebidas");
+/*meuElemento.scrollIntoView({ behavior: "smooth" });*/
+
+function scrollParaElemento() {
+    meuElemento.scrollIntoView({ behavior: "smooth" });
+    
+  }
+  document.getElementById("botao-menu1").addEventListener("click", scrollParaElemento);
+
+  const meuElemento2 = document.getElementById("porcoes");
+/*meuElemento.scrollIntoView({ behavior: "smooth" });*/
+
+function scrollParaElemento2() {
+    meuElemento2.scrollIntoView({ behavior: "smooth" });
+    
+  }
+  document.getElementById("botao-menu3").addEventListener("click", scrollParaElemento2);
 
